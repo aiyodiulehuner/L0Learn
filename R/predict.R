@@ -26,7 +26,7 @@ predict.L0Learn <- function(object,newx,lambda,gamma=0, ...)
 {
 		beta = coef.L0Learn(object, lambda, gamma)
 		# add a column of ones for the intercept
-		x = cbind(1,newx)
+		x = newx #cbind(1,newx)
 		prediction = x%*%beta
 		if (object$loss == "Logistic" || object$loss == "SquaredHinge")
 		{

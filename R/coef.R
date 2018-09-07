@@ -25,9 +25,7 @@ coef.L0Learn <- function(object,lambda,gamma=0, ...){
 		gammaindex = which(diffGamma==min(diffGamma))
 		diffLambda = abs(lambda - object$lambda[[gammaindex]])
 		indices = which(diffLambda == min(diffLambda))
-		#indices = match(lambda,object$lambda[[gammaindex]])
-		t = rbind(object$a0[[gammaindex]][indices],object$beta[[gammaindex]][,indices,drop=FALSE])
-		rownames(t) = c("Intercept",paste(rep("V",object$p),1:object$p,sep=""))
+		t = object$beta[[gammaindex]][,indices,drop=FALSE]
 		t
 }
 

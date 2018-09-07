@@ -4,9 +4,9 @@
 std::tuple<arma::vec, arma::vec, double>  Normalize(const arma::mat& X, const arma::vec& y, arma::mat & X_normalized, arma::vec & y_normalized, bool Normalizey = false)
 {
     unsigned int n = X.n_rows;
-    // unsigned int p = X.n_cols;
+    unsigned int p = X.n_cols;
 
-    arma::rowvec meanX = arma::mean(X, 0);
+    arma::rowvec meanX = arma::zeros<arma::rowvec>(p);//arma::mean(X, 0);
 
     X_normalized = X.each_row() - meanX;
     arma::rowvec scaleX = std::sqrt(n) * arma::stddev(X_normalized, 1, 0); // contains the l2norm of every col
@@ -18,7 +18,7 @@ std::tuple<arma::vec, arma::vec, double>  Normalize(const arma::mat& X, const ar
     double meany = 0;
     if (Normalizey)
     {
-        meany = arma::mean(y);
+        meany = 0; //arma::mean(y);
         y_normalized = y - meany;
         double scaley = arma::as_scalar(std::sqrt(n) * arma::stddev(y_normalized, 1, 0)); // contains the l2norm of y
         y_normalized = y_normalized / scaley;
