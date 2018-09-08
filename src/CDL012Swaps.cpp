@@ -26,7 +26,7 @@ FitResult CDL012Swaps::Fit()
         // Can easily shuffle here...
         //std::shuffle(std::begin(Order), std::end(Order), engine);
         foundbetter = false;
-
+        if (NnzIndices.size() == X->n_cols) {break;}
 
 
         //arma::uvec Sc (Sctemp);
