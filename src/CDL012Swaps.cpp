@@ -59,7 +59,7 @@ FitResult CDL012Swaps::Fit()
             //if(maxcorr > (1 + 2 * ModelParams[2])*std::fabs(B[i]) + ModelParams[1] )
             arma::vec ri = r + B[i] * X->unsafe_col(i);
             double betaj = (riX[maxindex] - std::copysign(ModelParams[1], riX[maxindex])) / (1 + 2 * ModelParams[2]);
-            if (objective > 0.5*arma::dot(ri,ri) - riX[maxindex]*betaj + 0.5*betaj*betaj + ModelParams[0] + ModelParams[1]*std::fabs(betaj) + ModelParams[2]*betaj*betaj;
+            if (objective > 0.5*arma::dot(ri,ri) - riX[maxindex]*betaj + 0.5*betaj*betaj + ModelParams[0] + ModelParams[1]*std::fabs(betaj) + ModelParams[2]*betaj*betaj)
             {
                 std::cout<<"!!!!! Swapping !!!! " <<std::endl;
                 std::cout<<"Obj before "<<objective<<std::endl;
