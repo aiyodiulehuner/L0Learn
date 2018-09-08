@@ -65,14 +65,15 @@ FitResult CDL012Swaps::Fit()
             {
                 std::cout<<"!!!!! Swapping "<<i <<" with " << maxindex <<std::endl;
                 std::cout<<" initial obj = " << initialobj <<" swap obj = " <<swapobj <<std::endl;
-                std::cout<<"Obj before "<<objective<<std::endl;
+                std::cout<<"Obj before "<<Objective(r,B)<<std::endl;
                 B[i] = 0;
                 B[maxindex] = (riX[maxindex] - std::copysign(ModelParams[1], riX[maxindex])) / (1 + 2 * ModelParams[2]);
                 P.InitialSol = &B;
                 result = CDL012(*X, *y, P).Fit();
                 B = result.B;
                 objective = result.Objective;
-                std::cout<<"Obj after "<<objective<<std::endl;
+                arma::vec tempr = *y - *X * B;
+                std::cout<<"Obj after "<<Objective(tempr,B)<<std::endl;
                 foundbetter = true;
                 break;
 
