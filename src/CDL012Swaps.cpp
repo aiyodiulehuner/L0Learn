@@ -14,8 +14,8 @@ FitResult CDL012Swaps::Fit()
     bool foundbetter;
     for (unsigned int t = 0; t < MaxNumSwaps; ++t)
     {
-        std::cout<<"1Swaps Iteration: "<<t<<". "<<"Obj: "<<objective<<std::endl;
-        B.print();
+        //std::cout<<"1Swaps Iteration: "<<t<<". "<<"Obj: "<<objective<<std::endl;
+        //B.print();
         arma::sp_mat::const_iterator start = B.begin();
         arma::sp_mat::const_iterator end   = B.end();
         std::vector<unsigned int> NnzIndices;
@@ -37,7 +37,7 @@ FitResult CDL012Swaps::Fit()
 
         for (auto& i : NnzIndices)
         {
-            std::cout<<"i: "<<i<<std::endl;
+            //std::cout<<"i: "<<i<<std::endl;
 
             arma::rowvec riX = (r + B[i] * X->unsafe_col(i)).t() * *X; // expensive computation ## call the new function here, inlined? ##
             //std::cout<<"HERE1!!!" << std::endl;
@@ -63,8 +63,8 @@ FitResult CDL012Swaps::Fit()
             double swapobj = 0.5*arma::dot(ri,ri) - riX[maxindex]*betaj + 0.5*betaj*betaj + ModelParams[0] + ModelParams[1]*std::fabs(betaj) + ModelParams[2]*betaj*betaj;
             if ( initialobj > swapobj)
             {
-                std::cout<<" initial obj = " << initialobj <<" swap obj = " <<swapobj <<std::endl;
                 std::cout<<"!!!!! Swapping "<<i <<" with " << maxindex <<std::endl;
+                std::cout<<" initial obj = " << initialobj <<" swap obj = " <<swapobj <<std::endl;
                 std::cout<<"Obj before "<<objective<<std::endl;
                 B[i] = 0;
                 B[maxindex] = (riX[maxindex] - std::copysign(ModelParams[1], riX[maxindex])) / (1 + 2 * ModelParams[2]);
@@ -83,7 +83,7 @@ FitResult CDL012Swaps::Fit()
     }
 
 
-    std::cout<<"Did not achieve CW Swap min" << std::endl;
+    //std::cout<<"Did not achieve CW Swap min" << std::endl;
     result.Model = this;
     return result;
 }
