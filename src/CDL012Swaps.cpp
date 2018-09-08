@@ -60,7 +60,7 @@ FitResult CDL012Swaps::Fit()
             arma::vec ri = r + B[i] * X->unsafe_col(i);
             double betaj = (riX[maxindex] - std::copysign(ModelParams[1], riX[maxindex])) / (1 + 2 * ModelParams[2]);
             double initialobj = 0.5*arma::dot(r,r) + ModelParams[0] + ModelParams[1]*std::fabs(B[i]) + ModelParams[2]*B[i]*B[i];
-            double swapobj = 0.5*arma::dot(ri,ri) - riX[maxindex]*betaj + 0.5*betaj*betaj + ModelParams[0] + ModelParams[1]*std::fabs(betaj) + ModelParams[2]*betaj*betaj
+            double swapobj = 0.5*arma::dot(ri,ri) - riX[maxindex]*betaj + 0.5*betaj*betaj + ModelParams[0] + ModelParams[1]*std::fabs(betaj) + ModelParams[2]*betaj*betaj;
             if ( initialobj > swapobj)
             {
                 std::cout<<" initial obj = " << initialobj <<" swap obj = " <<swapobj <<std::endl;
