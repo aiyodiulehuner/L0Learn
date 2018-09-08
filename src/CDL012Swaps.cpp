@@ -1,3 +1,4 @@
+#include <cmath>
 #include "CDL012Swaps.h"
 #include "CDL012.h"
 
@@ -57,12 +58,15 @@ FitResult CDL012Swaps::Fit()
 
             if(maxcorr > (1 + 2 * ModelParams[2])*std::fabs(B[i]) + ModelParams[1] )
             {
+                std::cout<<"!!!!! Swapping !!!! " <<std::endl;
+                std::cout<<"Obj before "<<objective<<std::endl;
                 B[i] = 0;
                 B[maxindex] = (riX[maxindex] - std::copysign(ModelParams[1], riX[maxindex])) / (1 + 2 * ModelParams[2]);
                 P.InitialSol = &B;
                 result = CDL012(*X, *y, P).Fit();
                 B = result.B;
                 objective = result.Objective;
+                std::cout<<"Obj after "<<objective<<std::endl;
                 foundbetter = true;
                 break;
 
